@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
     /* helloworld() function is defined in feature.h and implemented in feature.c */
     helloWorld();
   }
-  if ( strncmp( configuration.command, "dimension", 9 ) == 0 ) {
+  else if ( strncmp( configuration.command, "dimension", 3 ) == 0 ) {
     /* dimension() function is defined in feature.h and implemented in feature.c */
     dimension( configuration.filenames[0] );
 }

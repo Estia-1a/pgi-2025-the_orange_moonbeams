@@ -17,10 +17,11 @@ void helloWorld() {
 
 int read_image_data(const char *filename, unsigned char **data, int *width, int *height, int *channel_count);
 
-void dimension(char *source_path) {
-    unsigned char *data = NULL;
+void dimension(char* filename) {
+    unsigned char* data;
     int width, height, channels;
-
+    read_image_data(filename, &data, &width, &height, &channels);
     
-    printf("dimension: %d, %d\n", &width, &height);
+    printf("dimension: %s: %d x %d\n", filename, width, height);
+    free_image_data(data);
 }
