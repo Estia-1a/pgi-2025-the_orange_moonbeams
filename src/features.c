@@ -40,4 +40,14 @@ void tenth_pixel (char *filename){
     printf("tenth pixel: R=%d, G=%d, B=%d\n", R, G, B);
     free_image_data(data);
 
+void first_pixel(char* filename) {
+    unsigned char* data;
+    int width, height, channels;
+    int R, G, B;
+    read_image_data(filename, &data, &width, &height, &channels);
+    R = data[0];
+    G = data[1];
+    B = data[2];
+    printf("first_pixel: %d %d %d",  R, G, B);
+    free_image_data(data);
 }
