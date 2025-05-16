@@ -14,3 +14,13 @@
 void helloWorld() {
     printf("Hello World !");
 }
+
+int read_image_data(const char *filename, unsigned char **data, int *width, int *height, int *channel_count);
+
+void dimension(char *source_path) {
+    unsigned char *data = NULL;
+    int width, height, channels;
+
+    
+    printf("dimension: %d, %d\n", &width, &height);
+}
