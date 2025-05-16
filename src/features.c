@@ -39,7 +39,7 @@ void tenth_pixel (char *filename){
 
     printf("tenth pixel: R=%d, G=%d, B=%d\n", R, G, B);
     free_image_data(data);
-
+}
 void first_pixel(char* filename) {
     unsigned char* data;
     int width, height, channels;
