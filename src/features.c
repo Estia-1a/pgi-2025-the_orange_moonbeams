@@ -37,7 +37,7 @@ void tenth_pixel (char *filename){
     G=data[28];
     B=data[29];
 
-    printf("tenth pixel: R=%d, G=%d, D=%d\n", R, G, B);
+    printf("tenth pixel: R=%d, G=%d, B=%d\n", R, G, B);
     free_image_data(data);
 
 }
