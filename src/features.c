@@ -25,3 +25,19 @@ void dimension(char* filename) {
     printf("dimension: %s: %d x %d\n", filename, width, height);
     free_image_data(data);
 }
+
+void tenth_pixel (char *filename){
+    unsigned char* data;
+    int width, height, channels;
+    int R, G, B;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    R=data[27];
+    G=data[28];
+    B=data[29];
+
+    printf("tenth pixel: R=%d, G=%d, D=%d\n", R, G, B);
+    free_image_data(data);
+
+}
