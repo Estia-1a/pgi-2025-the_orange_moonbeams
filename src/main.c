@@ -60,9 +60,6 @@ int main(int argc, char **argv) {
     color_red(configuration.filenames[0]);
 } else if (strncmp(configuration.command, "color_green", 11) == 0) {
     color_green(configuration.filenames[0]);
-
-
-
 } else if (strncmp(configuration.command, "stat_report", 11) == 0) {
     stat_report(configuration.filenames[0]);
 }
@@ -71,7 +68,13 @@ else if (strncmp(configuration.command, "color_gray", 10) == 0) {
 }
 else if (strncmp(configuration.command, "color_gray_luminance", 10) == 0) {
     color_gray_luminance(configuration.filenames[0]);
-}
+} else if (strncmp(configuration.command, "color_blue", 10) == 0) {
+    color_blue(configuration.filenames[0]);
+} else if (strncmp(configuration.command, "stat_report", 11) == 0) {
+    stat_report(configuration.filenames[0]);
+} else if (strncmp(configuration.command, "color_invert", 12) == 0) {
+    color_invert(configuration.filenames[0]);
+} 
 
 
   return 0;

@@ -245,7 +245,8 @@ void color_green(char *filename) {
     free_image_data(data);
 }
 
-void color_gray(char *filename) {
+
+void color_blue(char *filename) {
     unsigned char *data;
     int width, height, channels;
 
@@ -253,16 +254,28 @@ void color_gray(char *filename) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            pixelRGB* pixel = get_pixel(data, width, height, channels, x, y);
-            if (pixel != NULL) {
-                unsigned char value = (pixel->R + pixel->G + pixel->B) / 3;
-                pixel->R = value;
-                pixel->G = value;
-                pixel->B = value;  
-            }
+            int i = (y * width + x) * channels;
+            data[i] = 0; 
+            data[i + 1] = 0;
         }
     }
 
+    write_image_data("image_blue.png", data, width, height);
+    free_image_data(data);
+}
+void color_gray(char *filename) {
+    unsigned char *data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+    pixelRGB* pixel = get_pixel(data, width, height, channels, x, y);
+    if (pixel != NULL) {
+        unsigned char value = (pixel->R + pixel->G + pixel->B) / 3;
+        pixel->R = value;
+        pixel->G = value;
+        pixel->B = value;  
+    }
+        
     write_image_data("image_out.bmp", data, width, height);
     free_image_data(data);
 }
@@ -272,19 +285,40 @@ void color_gray_luminance(char *filename) {
     int width, height, channels;
 
     read_image_data(filename, &data, &width, &height, &channels);
-
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            pixelRGB* pixel = get_pixel(data, width, height, channels, x, y);
-            if (pixel != NULL) {
-                unsigned char value = (0.21 * pixel->R + 0.72 * pixel->G + 0.07 * pixel->B);
-                pixel->R = value;
-                pixel->G = value;
-                pixel->B = value;  
-            }
-        }
+    pixelRGB* pixel = get_pixel(data, width, height, channels, x, y);
+    if (pixel != NULL) {
+        unsigned char value = (0.21 * pixel->R + 0.72 * pixel->G + 0.07 * pixel->B);
+        pixel->R = value;
+        pixel->G = value;
+        pixel->B = value;  
     }
 
     write_image_data("image_out.bmp", data, width, height);
     free_image_data(data);
 }
+            
+
+
+void color_invert(char *filename) {
+    unsigned char *data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            
+            int i = (y * width + x) * channels;
+            data[i] = 255 - data[i]; 
+            data[i + 1] = 255 - data[i + 1];
+            data[i + 2] = 255 - data[i + 2];
+        }
+    }
+
+    write_image_data("image_invert.png", data, width, height);
+    free_image_data(data);
+}
+
+
+
+
