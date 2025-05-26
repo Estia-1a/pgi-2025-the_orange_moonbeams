@@ -49,12 +49,17 @@ int main(int argc, char **argv) {
     print_pixel(configuration.filenames[0], x, y);
 } else if (strncmp(configuration.command, "min_pixel", 9) == 0) {
     min_pixel(configuration.filenames[0]);
-}
   
 } else if (strncmp(configuration.command, "max_component", 13) == 0) {
     char comp = configuration.arguments[0][0];
     max_component(configuration.filenames[0], comp);
+} else if (strncmp(configuration.command, "min_component", 13) == 0) {
+    char comp = configuration.arguments[0][0];
+    min_component(configuration.filenames[0], comp);
 }
+
+
+
 
     
   return 0;
