@@ -177,4 +177,35 @@ void min_component(char *filename, char component) {
     free_image_data(data);
 }
 
+void stat_report(char *filename){
+    freopen("stat_report.txt", "w", stdout);
+
+    min_pixel(filename);
+    printf("\n");
+
+    max_component(filename, 'R');
+    printf("\n");
+
+    max_component(filename, 'G');
+    printf("\n");
+
+    max_component(filename, 'B');
+    printf("\n");
+
+    min_component(filename, 'R');
+    printf("\n");
+
+    min_component(filename, 'G');
+    printf("\n");
+
+    min_component(filename, 'B');
+    printf("\n");
+
+    fflush(stdout);
+    fclose(stdout);
+
+    freopen("CON", "w", stdout);    
+}
+
+
 
