@@ -15,5 +15,6 @@ void color_red(char *filename);
 void color_green(char *filename);
 void stat_report(char *filename);
 void color_blue(char *filename);
+void color_invert(char *filename);
 
 #endif

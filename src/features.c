@@ -263,5 +263,25 @@ void color_blue(char *filename) {
     free_image_data(data);
 }
 
+void color_invert(char *filename) {
+    unsigned char *data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channels;
+            data[i] = 255 - data[i]; 
+            data[i + 1] = 255 - data[i + 1];
+            data[i + 2] = 255 - data[i + 2];
+        }
+    }
+
+    write_image_data("image_invert.png", data, width, height);
+    free_image_data(data);
+}
+
+
 
 
