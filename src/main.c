@@ -47,6 +47,8 @@ int main(int argc, char **argv) {
     int x = atoi(configuration.arguments[0]);
     int y = atoi(configuration.arguments[1]);
     print_pixel(configuration.filenames[0], x, y);
+} else if (strncmp(configuration.command, "max_pixel", 9) == 0) {
+    max_pixel(configuration.filenames[0]);   
 } else if (strncmp(configuration.command, "min_pixel", 9) == 0) {
     min_pixel(configuration.filenames[0]);
   
@@ -75,6 +77,9 @@ else if (strncmp(configuration.command, "color_gray_luminance", 10) == 0) {
 } else if (strncmp(configuration.command, "color_invert", 12) == 0) {
     color_invert(configuration.filenames[0]);
 } 
+else if (strncmp(configuration.command, "rotate_cw", 9) == 0) {
+    rotate_cw(configuration.filenames[0]);
+}
 
 
   return 0;

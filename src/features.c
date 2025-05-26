@@ -86,6 +86,40 @@ void print_pixel(char *filename, int x, int y) {
     free_image_data(data);
 }
 
+void max_pixel(char *filename) {
+    unsigned char* data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    int max_sum = 0;
+    int max_x = 0, max_y = 0;
+    int R, G, B;
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channels;
+            R = data[i];
+            G = data[i + 1];
+            B = data[i + 2];
+            int sum = R + G + B;
+
+            if (sum > max_sum) {
+                max_sum = sum;
+                max_x = x;
+                max_y = y;
+            }
+        }
+    }
+
+    printf("max_pixel (%d, %d): %d, %d, %d\n", max_x, max_y,
+           data[(max_y * width + max_x) * channels],
+           data[(max_y * width + max_x) * channels + 1],
+           data[(max_y * width + max_x) * channels + 2]);
+
+    free_image_data(data);
+}
+
 void min_pixel(char *filename) {
     unsigned char* data;
     int width, height, channels;
@@ -179,6 +213,9 @@ void min_component(char *filename, char component) {
 
 void stat_report(char *filename){
     freopen("stat_report.txt", "w", stdout);
+
+    max_pixel(filename);
+    printf("\n");
 
     min_pixel(filename);
     printf("\n");
@@ -328,6 +365,66 @@ void color_invert(char *filename) {
 
     write_image_data("image_invert.bmp", data, width, height);
     free_image_data(data);
+}
+
+void rotate_cw(char *filename) {
+    unsigned char *data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    int new_width = height;
+    int new_height = width;
+
+    unsigned char *rotated_data = malloc(new_width * new_height * channels);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int src_index = (y * width + x) * channels;
+            int new_x = height - 1 - y;
+            int new_y = x;
+            int new_src_index = (new_y * new_width + new_x) * channels;
+
+            for (int c = 0; c < channels; c++) {
+                rotated_data[new_src_index + c] = data[src_index + c];
+            }
+        }
+    }
+
+    write_image_data("image_out.bmp", rotated_data, new_width, new_height);
+
+    free_image_data(data);
+    free(rotated_data);
+}
+
+void rotate_acw(char *filename) {
+    unsigned char *data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    int new_width = height;
+    int new_height = width;
+
+    unsigned char *rotated_data = malloc(new_width * new_height * channels);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int src_index = (y * width + x) * channels;
+            int new_x = height - 1 - y;
+            int new_y = x;
+            int new_src_index = (new_y * new_width + new_x) * channels;
+
+            for (int c = 0; c < channels; c++) {
+                rotated_data[new_src_index + c] = data[src_index + c];
+            }
+        }
+    }
+
+    write_image_data("image_out.bmp", rotated_data, new_width, new_height);
+
+    free_image_data(data);
+    free(rotated_data);
 }
 
 
