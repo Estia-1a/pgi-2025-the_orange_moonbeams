@@ -23,7 +23,7 @@ void dimension(char* filename) {
     int width, height, channels;
     read_image_data(filename, &data, &width, &height, &channels);
     
-    printf("dimension: %d, %d\n", width, height);
+    printf("dimension: %s: %d x %d\n", filename, width, height);
     free_image_data(data);
 }
 
@@ -38,7 +38,7 @@ void tenth_pixel (char *filename){
     G=data[28];
     B=data[29];
 
-    printf("tenth_pixel: %d, %d, %d\n", R, G, B);
+    printf("tenth pixel: R=%d, G=%d, B=%d\n", R, G, B);
     free_image_data(data);
 }
 void first_pixel(char* filename) {
@@ -49,7 +49,7 @@ void first_pixel(char* filename) {
     R = data[0];
     G = data[1];
     B = data[2];
-    printf("first_pixel: %d, %d, %d",  R, G, B);
+    printf("first_pixel: %d %d %d",  R, G, B);
     free_image_data(data);
 }
 
@@ -66,7 +66,7 @@ void second_line(char *filename){
     G = data[i+1];
     B = data[i+2];
 
-    printf("second_line: %d, %d, %d",  R, G, B);
+    printf("second_line: %d %d %d",  R, G, B);
 
     free_image_data(data);
 }
@@ -177,4 +177,40 @@ void min_component(char *filename, char component) {
     free_image_data(data);
 }
 
+
+void color_red(char *filename) {
+    unsigned char *data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channels;
+            data[i + 1] = 0; 
+            data[i + 2] = 0;   
+        }
+    }
+
+    write_image_data("image_red.png", data, width, height);
+    free_image_data(data);
+}
+
+void color_green(char *filename) {
+    unsigned char *data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channels;
+            data[i]     = 0; 
+            data[i + 2] = 0;   
+        }
+    }
+
+    write_image_data("image_green.png", data, width, height);
+    free_image_data(data);
+}
 

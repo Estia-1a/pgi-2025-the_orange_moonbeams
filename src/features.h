@@ -11,5 +11,7 @@ void print_pixel( char *filename, int x, int y );
 void min_pixel(char *source_path);
 void max_component(char *filename, char component);
 void min_component(char *filename, char component);
+void color_red(char *filename);
+void color_green(char *filename);
 
 #endif
