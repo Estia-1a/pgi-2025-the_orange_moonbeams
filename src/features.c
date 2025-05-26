@@ -119,3 +119,31 @@ void min_pixel(char *filename) {
 
     free_image_data(data);
 }
+
+void max_component(char *filename, char component) {
+    unsigned char *data;
+    int width, height, channels;
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    int max_val = -1;
+    int max_x = 0, max_y = 0;
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channels;
+            int value;
+            if (component == 'R') value = data[i];
+            else if (component == 'G') value = data[i + 1];
+            else value = data[i + 2];
+
+            if (value > max_val) {
+                max_val = value;
+                max_x = x;
+                max_y = y;
+            }
+        }
+    }
+
+    printf("max_component %c (%d, %d): %d\n", component, max_x, max_y, max_val);
+    free_image_data(data);
+}
