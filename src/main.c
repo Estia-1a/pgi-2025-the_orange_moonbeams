@@ -55,16 +55,22 @@ int main(int argc, char **argv) {
     max_component(configuration.filenames[0], comp);
 } else if (strncmp(configuration.command, "min_component", 13) == 0) {
     char comp = configuration.arguments[0][0];
-    min_component(configuration.filenames[0], comp);
+    min_component(configuration.filenames[0], comp); 
 } else if (strncmp(configuration.command, "color_red", 9) == 0) {
     color_red(configuration.filenames[0]);
 } else if (strncmp(configuration.command, "color_green", 11) == 0) {
     color_green(configuration.filenames[0]);
-}
 
-    
+
+
 } else if (strncmp(configuration.command, "stat_report", 11) == 0) {
     stat_report(configuration.filenames[0]);
+}
+else if (strncmp(configuration.command, "color_gray", 10) == 0) {
+    color_gray(configuration.filenames[0]);
+}
+else if (strncmp(configuration.command, "color_gray_luminance", 10) == 0) {
+    color_gray_luminance(configuration.filenames[0]);
 }
 
 
