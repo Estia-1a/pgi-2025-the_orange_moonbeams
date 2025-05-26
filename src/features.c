@@ -23,7 +23,7 @@ void dimension(char* filename) {
     int width, height, channels;
     read_image_data(filename, &data, &width, &height, &channels);
     
-    printf("dimension: %s: %d x %d\n", filename, width, height);
+    printf("dimension: %d, %d\n", width, height);
     free_image_data(data);
 }
 
@@ -38,7 +38,7 @@ void tenth_pixel (char *filename){
     G=data[28];
     B=data[29];
 
-    printf("tenth pixel: R=%d, G=%d, B=%d\n", R, G, B);
+    printf("tenth_pixel: %d, %d, %d\n", R, G, B);
     free_image_data(data);
 }
 void first_pixel(char* filename) {
@@ -49,7 +49,7 @@ void first_pixel(char* filename) {
     R = data[0];
     G = data[1];
     B = data[2];
-    printf("first_pixel: %d %d %d",  R, G, B);
+    printf("first_pixel: %d, %d, %d",  R, G, B);
     free_image_data(data);
 }
 
@@ -66,7 +66,7 @@ void second_line(char *filename){
     G = data[i+1];
     B = data[i+2];
 
-    printf("second_line: %d %d %d",  R, G, B);
+    printf("second_line: %d, %d, %d",  R, G, B);
 
     free_image_data(data);
 }
@@ -147,3 +147,4 @@ void max_component(char *filename, char component) {
     printf("max_component %c (%d, %d): %d\n", component, max_x, max_y, max_val);
     free_image_data(data);
 }
+
