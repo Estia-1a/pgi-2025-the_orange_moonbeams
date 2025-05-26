@@ -85,3 +85,37 @@ void print_pixel(char *filename, int x, int y) {
 
     free_image_data(data);
 }
+
+void min_pixel(char *filename) {
+    unsigned char* data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    int min_sum = 256 * 3 + 1;
+    int min_x = 0, min_y = 0;
+    int R, G, B;
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channels;
+            R = data[i];
+            G = data[i + 1];
+            B = data[i + 2];
+            int sum = R + G + B;
+
+            if (sum < min_sum) {
+                min_sum = sum;
+                min_x = x;
+                min_y = y;
+            }
+        }
+    }
+
+    printf("min_pixel (%d, %d): %d, %d, %d\n", min_x, min_y,
+           data[(min_y * width + min_x) * channels],
+           data[(min_y * width + min_x) * channels + 1],
+           data[(min_y * width + min_x) * channels + 2]);
+
+    free_image_data(data);
+}

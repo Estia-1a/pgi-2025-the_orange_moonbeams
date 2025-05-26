@@ -47,8 +47,10 @@ int main(int argc, char **argv) {
     int x = atoi(configuration.arguments[0]);
     int y = atoi(configuration.arguments[1]);
     print_pixel(configuration.filenames[0], x, y);
+} else if (strncmp(configuration.command, "min_pixel", 9) == 0) {
+    min_pixel(configuration.filenames[0]);
 }
-    
+  
   return 0;
 
 }
