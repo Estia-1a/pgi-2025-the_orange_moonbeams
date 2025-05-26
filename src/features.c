@@ -1,5 +1,6 @@
 #include <estia-image.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "features.h"
 #include "utils.h"
@@ -51,3 +52,22 @@ void first_pixel(char* filename) {
     printf("first_pixel: %d %d %d",  R, G, B);
     free_image_data(data);
 }
+
+void second_line(char *filename){
+    unsigned char* data;
+    int i;
+    int width, height, channels;
+    int R, G, B;
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    i=3*width;
+
+    R = data[i];
+    G = data[i+1];
+    B = data[i+2];
+
+    printf("second_line: %d %d %d",  R, G, B);
+
+    free_image_data(data);
+}
+
