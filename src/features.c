@@ -51,3 +51,18 @@ void first_pixel(char* filename) {
     printf("first_pixel: %d %d %d",  R, G, B);
     free_image_data(data);
 }
+
+void print_pixel(char *filename, int x, int y) {
+    unsigned char* data;
+    int width, height, channels;
+    int R, G, B;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    pixelRGB* pixel = get_pixel(data, width, height, channels, x, y);
+    if (pixel != NULL) {
+        printf("print_pixel (%d, %d): %d, %d, %d\n", x, y, pixel->R, pixel->G, pixel->B);
+    }
+
+    free_image_data(data);
+}
