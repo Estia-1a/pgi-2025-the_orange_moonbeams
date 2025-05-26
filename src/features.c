@@ -236,7 +236,7 @@ void color_green(char *filename) {
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             int i = (y * width + x) * channels;
-            data[i]     = 0; 
+            data[i] = 0; 
             data[i + 2] = 0;   
         }
     }
@@ -244,4 +244,24 @@ void color_green(char *filename) {
     write_image_data("image_green.png", data, width, height);
     free_image_data(data);
 }
+
+void color_blue(char *filename) {
+    unsigned char *data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channels;
+            data[i] = 0; 
+            data[i + 1] = 0;
+        }
+    }
+
+    write_image_data("image_blue.png", data, width, height);
+    free_image_data(data);
+}
+
+
 
