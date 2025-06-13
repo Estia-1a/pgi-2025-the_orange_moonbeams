@@ -427,7 +427,31 @@ void rotate_acw(char *filename) {
     free(rotated_data);
 }
 
+void mirror_horizontal(char *filename) {
+    unsigned char *data;
+    int width, height, channels;
 
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    unsigned char *mirrored_data = malloc(width * height * channels);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int src_index = (y * width + x) * channels;
+            int dst_y = height - 1 - y;
+            int dst_index = (dst_y * width + x) * channels;
+
+            for (int c = 0; c < channels; c++) {
+                mirrored_data[dst_index + c] = data[src_index + c];
+            }
+        }
+    }
+
+    write_image_data("image_out.bmp", mirrored_data, width, height);
+
+    free_image_data(data);
+    free(mirrored_data);
+}
 
 
 

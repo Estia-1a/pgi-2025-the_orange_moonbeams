@@ -21,5 +21,6 @@ void color_blue(char *filename);
 void color_invert(char *filename);
 void rotate_cw(char *filename);
 void rotate_acw(char *filename);
+void mirror_horizontal(char *filename);
 
 #endif
