@@ -428,7 +428,7 @@ void rotate_acw(char *filename) {
     free(rotated_data);
 }
 
-void mirror_horizontal(char *filename) {
+void mirror_vertical(char *filename) {
     unsigned char *data;
     int width, height, channels;
 
@@ -454,7 +454,7 @@ void mirror_horizontal(char *filename) {
     free(mirrored_data);
 }
 
-void mirror_vertical(char *filename) {
+void mirror_horizontal(char *filename) {
     unsigned char *data;
     int width, height, channels;
 
