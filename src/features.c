@@ -125,7 +125,6 @@ void min_pixel(char *filename) {
     int width, height, channels;
 
     read_image_data(filename, &data, &width, &height, &channels);
-    printf("channels = %d\n", channels);
 
     int min_sum = 256 * 3 + 1;
     int min_x = 0, min_y = 0;
