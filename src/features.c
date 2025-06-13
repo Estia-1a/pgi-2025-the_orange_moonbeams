@@ -125,6 +125,7 @@ void min_pixel(char *filename) {
     int width, height, channels;
 
     read_image_data(filename, &data, &width, &height, &channels);
+    printf("channels = %d\n", channels);
 
     int min_sum = 256 * 3 + 1;
     int min_x = 0, min_y = 0;
@@ -512,7 +513,7 @@ void scale_bilinear(char *filename, float X) {
    
 
     read_image_data(filename, &data, &width, &height, &channels);
-    printf("width=%d, height=%d\n", width, height);
+    
 
     int new_width = (int)(width * X);
     int new_height = (int)(height * X);
@@ -546,7 +547,6 @@ void scale_bilinear(char *filename, float X) {
             }
         }
     }
-    printf("new_width=%d, new_height=%d\n", new_width, new_height);
 
     write_image_data("image.bmp", scaled_data, new_width, new_height);
 
@@ -559,7 +559,6 @@ void scale_nearest(char *filename, float scale){
     int width, height, channels;
 
     read_image_data(filename, &data, &width, &height, &channels);
-    printf("w=%d,h=%d\n", width, height);
 
     int new_width = (int)(width * scale);
     int new_height = (int)(height * scale);
@@ -582,7 +581,6 @@ void scale_nearest(char *filename, float scale){
     }
 
     write_image_data("image.bmp", scaled_data, new_width, new_height);
-    printf("w=%d,h=%d\n", new_width, new_height);
 
     free_image_data(data);
     free(scaled_data);
@@ -617,3 +615,38 @@ void color_desaturate(char *filename){
     write_image_data("image_out.bmp", data, width, height);
     free_image_data(data);
 }
+
+void scale_crop(char* filename, int center_x, int center_y, int nw, int nh) {
+    unsigned char *data;
+    int width, height, channels;
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    unsigned char *cropped_data = malloc(nw * nh * channels);
+
+    for (int i = 0; i < nw * nh * channels; i++)
+        cropped_data[i] = 0;
+
+    int src_x0 = center_x - nw / 2;
+    int src_y0 = center_y - nh / 2;
+
+
+    for (int y = 0; y < nh; y++) {
+        int src_y = src_y0 + y;
+        if (src_y < 0 || src_y >= height) continue;
+
+        for (int x = 0; x < nw; x++) {
+            int src_x = src_x0 + x;
+            if (src_x < 0 || src_x >= width) continue;
+
+            for (int c = 0; c < channels; c++) {
+                cropped_data[(y * nw + x) * channels + c] = data[(src_y * width + src_x) * channels + c];
+            }
+        }
+    }
+
+    write_image_data("image_out.bmp", cropped_data, nw, nh);
+
+    free_image_data(data);
+    free(cropped_data);
+}
+

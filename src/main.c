@@ -100,7 +100,15 @@ else if (strcmp(configuration.command, "scale_nearest") == 0){
 }
 else if (strncmp(configuration.command, "color_desaturate", 12) == 0) {
     color_desaturate(configuration.filenames[0]);
-} 
+}
+else if (strncmp(configuration.command, "scale_crop", 10) == 0) {
+    int center_x = atoi(configuration.arguments[0]);
+    int center_y = atoi(configuration.arguments[1]);
+    int width = atoi(configuration.arguments[2]);
+    int height = atoi(configuration.arguments[3]);
+    scale_crop(configuration.filenames[0], center_x, center_y, width, height);
+}
+
 
   return 0;
 
