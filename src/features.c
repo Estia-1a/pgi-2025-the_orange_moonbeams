@@ -363,7 +363,7 @@ void color_invert(char *filename) {
         }
     }
 
-    write_image_data("image_invert.bmp", data, width, height);
+    write_image_data("image_out.bmp", data, width, height);
     free_image_data(data);
 }
 
@@ -587,7 +587,33 @@ void scale_nearest(char *filename, float scale){
     free_image_data(data);
     free(scaled_data);
 
-
- 
 }
 
+void color_desaturate(char *filename){
+    unsigned char *data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y*width+x)*channels;
+
+            unsigned char R=data[i];
+            unsigned char G=data[i+1];
+            unsigned char B=data[i+2];
+
+            unsigned char min_val=R < G ? (R < B ? R : B) : (G < B ? G : B);
+            unsigned char max_val=R > G ? (R > B ? R : B) : (G > B ? G : B);
+
+            unsigned char new_val = (min_val + max_val)/2;
+
+            data[i]=new_val;
+            data[i+1]=new_val;
+            data[i+2]=new_val;
+        }
+    }
+
+    write_image_data("image_out.bmp", data, width, height);
+    free_image_data(data);
+}

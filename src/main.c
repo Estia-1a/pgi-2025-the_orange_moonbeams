@@ -98,6 +98,9 @@ else if (strncmp(configuration.command, "scale_bilinear", 14) == 0)
 else if (strcmp(configuration.command, "scale_nearest") == 0){
     scale_nearest(configuration.filenames[0], atof(configuration.arguments[0]));
 }
+else if (strncmp(configuration.command, "color_desaturate", 12) == 0) {
+    color_desaturate(configuration.filenames[0]);
+} 
 
   return 0;
 
