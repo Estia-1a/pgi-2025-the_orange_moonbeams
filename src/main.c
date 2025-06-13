@@ -89,6 +89,9 @@ else if (strncmp(configuration.command, "mirror_horizontal", 10) == 0) {
 else if (strncmp(configuration.command, "mirror_vertical", 10) == 0) {
     mirror_vertical(configuration.filenames[0]);
 }
+else if (strcmp(configuration.command, "scale_nearest") == 0){
+    scale_nearest(configuration.filenames[0], atof(configuration.arguments[0]));
+}
 
   return 0;
 

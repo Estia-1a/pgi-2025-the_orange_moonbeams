@@ -479,3 +479,40 @@ void mirror_vertical(char *filename) {
     free(mirrored_data);
 }
 
+void scale_nearest(char *filename, float scale){
+    unsigned char *data;
+    int width, height, channels;
+
+    read_image_data(filename, &data, &width, &height, &channels);
+    printf("w=%d,h=%d\n", width, height);
+
+    int new_width = (int)(width * scale);
+    int new_height = (int)(height * scale);
+
+    unsigned char *scaled_data = malloc(new_width * new_height * channels);
+
+     for (int y = 0; y < new_height; y++) {
+        for (int x = 0; x < new_width; x++) {
+            
+            int src_x = (int)(x / scale);
+            int src_y = (int)(y / scale);
+
+            int src_index = (src_y * width + src_x) * channels;
+            int dst_index = (y * new_width + x) * channels;
+
+            for (int c = 0; c < channels; c++) {
+                scaled_data[dst_index + c] = data[src_index + c];
+            }
+        }
+    }
+
+    write_image_data("image.bmp", scaled_data, new_width, new_height);
+    printf("w=%d,h=%d\n", new_width, new_height);
+
+    free_image_data(data);
+    free(scaled_data);
+
+
+ 
+}
+
