@@ -23,6 +23,8 @@ void rotate_cw(char *filename);
 void rotate_acw(char *filename);
 void mirror_horizontal(char *filename);
 void mirror_vertical(char *filename);
+void mirror_total(char *filename);
+void scale_bilinear(char *filename, float X);
 void scale_nearest(char *filename, float scale);
 
 #endif
