@@ -20,5 +20,6 @@ void color_gray_luminance(char *filename);
 void color_blue(char *filename);
 void color_invert(char *filename);
 void rotate_cw(char *filename);
+void rotate_acw(char *filename);
 
 #endif

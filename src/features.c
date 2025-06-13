@@ -411,12 +411,12 @@ void rotate_acw(char *filename) {
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             int src_index = (y * width + x) * channels;
-            int new_x = height - 1 - y;
-            int new_y = x;
-            int new_src_index = (new_y * new_width + new_x) * channels;
+            int new_x = y;
+            int new_y = width - 1 - x;
+            int new_index = (new_y * new_width + new_x) * channels;
 
             for (int c = 0; c < channels; c++) {
-                rotated_data[new_src_index + c] = data[src_index + c];
+                rotated_data[new_index + c] = data[src_index + c];
             }
         }
     }
@@ -426,6 +426,7 @@ void rotate_acw(char *filename) {
     free_image_data(data);
     free(rotated_data);
 }
+
 
 
 
