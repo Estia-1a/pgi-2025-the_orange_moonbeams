@@ -506,3 +506,51 @@ void mirror_total(char *filename) {
     free(mirrored_data);
 }
 
+void scale_bilinear(char *filename, float X) {
+    unsigned char *data;
+    int width, height, channels;
+   
+
+    read_image_data(filename, &data, &width, &height, &channels);
+    printf("width=%d, height=%d\n", width, height);
+
+    int new_width = (int)(width * X);
+    int new_height = (int)(height * X);
+
+    unsigned char *scaled_data = malloc(new_width * new_height * channels);
+
+    for (int y = 0; y < new_height; y++) {
+        for (int x = 0; x < new_width; x++) {
+            float gx = x / X;
+            float gy = y / X;
+
+            int x0 = (int)gx;
+            int y0 = (int)gy;
+            int x1 = x0 + 1 < width ? x0 + 1 : x0;
+            int y1 = y0 + 1 < height ? y0 + 1 : y0;
+
+            float dx = gx - x0;
+            float dy = gy - y0;
+
+            for (int c = 0; c < channels; c++) {
+                float Q11 = data[(y0 * width + x0) * channels + c];
+                float Q12 = data[(y0 * width + x1) * channels + c];
+                float Q21 = data[(y1 * width + x0) * channels + c];
+                float Q22 = data[(y1 * width + x1) * channels + c];
+
+                float R1 = (1 - dx) * Q11 + dx * Q12;
+                float R2 = (1 - dx) * Q21 + dx * Q22;
+                float P = (1 - dy) * R1 + dy * R2;
+
+                scaled_data[(y * new_width + x) * channels + c] = (unsigned char)(P);
+            }
+        }
+    }
+    printf("new_width=%d, new_height=%d\n", new_width, new_height);
+
+    write_image_data("image.bmp", scaled_data, new_width, new_height);
+
+    free_image_data(data);
+    free(scaled_data);
+}
+

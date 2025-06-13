@@ -92,6 +92,9 @@ else if (strncmp(configuration.command, "mirror_vertical", 10) == 0) {
 else if (strncmp(configuration.command, "mirror_total", 10) == 0) {
     mirror_total(configuration.filenames[0]);
 }
+else if (strncmp(configuration.command, "scale_bilinear", 14) == 0)
+    scale_bilinear(configuration.filenames[0], atof(configuration.arguments[0]));
+
 
   return 0;
 
