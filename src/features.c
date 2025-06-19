@@ -380,13 +380,13 @@ void rotate_cw(char *filename) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            int src_index = (y * width + x) * channels;
+            int i = (y * width + x) * channels;
             int new_x = height - 1 - y;
             int new_y = x;
-            int new_src_index = (new_y * new_width + new_x) * channels;
+            int new_i = (new_y * new_width + new_x) * channels;
 
             for (int c = 0; c < channels; c++) {
-                rotated_data[new_src_index + c] = data[src_index + c];
+                rotated_data[new_i + c] = data[i + c];
             }
         }
     }
@@ -410,13 +410,13 @@ void rotate_acw(char *filename) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            int src_index = (y * width + x) * channels;
+            int i = (y * width + x) * channels;
             int new_x = y;
             int new_y = width - 1 - x;
             int new_index = (new_y * new_width + new_x) * channels;
 
             for (int c = 0; c < channels; c++) {
-                rotated_data[new_index + c] = data[src_index + c];
+                rotated_data[new_index + c] = data[i + c];
             }
         }
     }
@@ -437,12 +437,12 @@ void mirror_vertical(char *filename) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            int src_index = (y * width + x) * channels;
+            int i = (y * width + x) * channels;
             int dst_y = height - 1 - y;
             int dst_index = (dst_y * width + x) * channels;
 
             for (int c = 0; c < channels; c++) {
-                mirrored_data[dst_index + c] = data[src_index + c];
+                mirrored_data[dst_index + c] = data[i + c];
             }
         }
     }
@@ -463,12 +463,12 @@ void mirror_horizontal(char *filename) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            int src_index = (y * width + x) * channels;
+            int i = (y * width + x) * channels;
             int dst_x = width - 1 - x;
             int dst_index = (y * width + dst_x) * channels;
 
             for (int c = 0; c < channels; c++) {
-                mirrored_data[dst_index + c] = data[src_index + c];
+                mirrored_data[dst_index + c] = data[i + c];
             }
         }
     }
@@ -489,13 +489,13 @@ void mirror_total(char *filename) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            int src_index = (y * width + x) * channels;
+            int i = (y * width + x) * channels;
             int dst_x = width - 1 - x;
             int dst_y = height - 1 - y;
             int dst_index = (dst_y * width + dst_x) * channels;
 
             for (int c = 0; c < channels; c++) {
-                mirrored_data[dst_index + c] = data[src_index + c];
+                mirrored_data[dst_index + c] = data[i + c];
             }
         }
     }
@@ -570,11 +570,11 @@ void scale_nearest(char *filename, float scale){
             int src_x = (int)(x / scale);
             int src_y = (int)(y / scale);
 
-            int src_index = (src_y * width + src_x) * channels;
+            int i = (src_y * width + src_x) * channels;
             int dst_index = (y * new_width + x) * channels;
 
             for (int c = 0; c < channels; c++) {
-                scaled_data[dst_index + c] = data[src_index + c];
+                scaled_data[dst_index + c] = data[i + c];
             }
         }
     }
