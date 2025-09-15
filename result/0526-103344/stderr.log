@@ -1,0 +1,15 @@
+/home/runner/work/pgi-2025-the_orange_moonbeams/pgi-2025-the_orange_moonbeams/src/main.c:54:3: error: expected identifier or ‘(’ before ‘else’
+   54 | } else if (strncmp(configuration.command, "max_component", 13) == 0) {
+      |   ^~~~
+/home/runner/work/pgi-2025-the_orange_moonbeams/pgi-2025-the_orange_moonbeams/src/main.c:60:3: error: expected identifier or ‘(’ before ‘return’
+   60 |   return 0;
+      |   ^~~~~~
+/home/runner/work/pgi-2025-the_orange_moonbeams/pgi-2025-the_orange_moonbeams/src/main.c:62:1: error: expected identifier or ‘(’ before ‘}’ token
+   62 | }
+      | ^
+gmake[2]: *** [CMakeFiles/freud.dir/build.make:107: CMakeFiles/freud.dir/src/main.c.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/freud.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2
+
+The process '/usr/local/bin/cmake' failed with exit code 2
